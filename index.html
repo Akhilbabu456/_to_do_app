@@ -1,0 +1,749 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+      @media (min-width: 816px){
+        *{
+    margin:0;
+    padding: 0;
+   }
+   body{
+    background: #000;
+    }
+   .container{
+    display: flex;
+   justify-content: center;
+   align-items: center;
+    height: 100px;
+    background: transparent;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 40px;
+   }
+   h1{
+    color: #fff;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 40px;
+    font-weight: 800;
+   }
+   input{
+    padding: 5px;
+    border-radius: 7px;
+    font-weight: 600;
+   }
+   .submit{
+    background-color: rgb(75, 202, 252);
+    color: #fff;
+    border: none;
+    padding-left: 8px;
+    padding-right: 8px;
+   }
+   #task{
+    width: 400px;
+    border: none;
+    box-shadow: 0 0 0 .8px #000;
+    background: #fff;
+   }
+   ol{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+   }
+   li{
+    position: relative;
+     width: 750px;
+     display: flex;
+     justify-content: space-between;
+     margin: auto;
+     border: 1px solid #fff;
+     padding: 7px 25px;
+     border-radius: 30px;
+     margin-bottom: 5px;
+     margin-right: 20px;
+   }
+   .delete-icon{
+    position: absolute;
+    right: 75px;
+   }
+   .btn-primary{
+    margin-left: 5px;
+    height: 38px;
+   }
+   .check-box{
+    position: absolute;
+    top: 42%;
+    left: 4%;
+    margin-right: 18px;
+   }
+   h5{
+    color: #000;
+    font-size: 25px;
+   }
+   label{
+    color: #000;
+   }
+   .update-button{
+    background-color: rgb(75, 202, 252);
+    color: #fff;
+    border: none;
+    padding: 6px 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+   }
+   .strikethrough {
+  text-decoration: line-through;
+  }
+  .task-text{
+    word-wrap: break-word;
+    max-width: 550px;
+    color: #fff;
+    margin-left: 25px;
+    margin-top: 3px;
+  }
+}
+  @media (max-width: 816px){
+    *{
+    margin:0;
+    padding: 0;
+   }
+   body{
+    background: #000;
+    }
+   .container{
+    display: flex;
+    margin: auto;
+    height: 100px;
+    background: transparent;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-left: 20px;
+   }
+   h1{
+    color: #fff;
+    margin-left: 35px;
+    margin-top: 100px;
+    font-size: 40px;
+    font-weight: 800;
+   }
+   input{
+    padding: 5px;
+    border-radius: 7px;
+    font-weight: 600;
+   }
+   .submit{
+    background-color: rgb(75, 202, 252);
+    color: #fff;
+    border: none;
+    padding-left: 8px;
+    padding-right: 8px;
+   }
+   #task{
+    width: 200px;
+    margin: auto;
+    border: none;
+    box-shadow: 0 0 0 .8px #000;
+    background: #fff;
+   }
+   ol{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+   }
+   li{
+    position: relative;
+     width: 750px;
+     display: flex;
+     justify-content: space-between;
+     margin: auto;
+     border: 1px solid #fff;
+     padding: 7px 25px;
+     border-radius: 30px;
+     margin-bottom: 5px;
+     margin-right: 20px;
+   }
+   .delete-icon{
+    position: absolute;
+    right: 75px;
+   }
+   .btn-primary{
+    margin-left: 5px;
+    height: 38px;
+   }
+   .check-box{
+    position: absolute;
+    top: 42%;
+    left: 4%;
+    margin-right: 18px;
+   }
+   h5{
+    color: #000;
+    font-size: 25px;
+   }
+   label{
+    color: #000;
+   }
+   .update-button{
+    background-color: rgb(75, 202, 252);
+    color: #fff;
+    border: none;
+    padding: 6px 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+   }
+   .strikethrough {
+  text-decoration: line-through;
+  }
+  .task-text{
+    word-wrap: break-word;
+    max-width: 550px;
+    color: #fff;
+    margin-left: 25px;
+    margin-top: 3px;
+  }
+  }
+    </style>
+</head>
+<body>
+    <h1>TO-DO</h1>
+    <div class="container">
+        <form action="submit" method="post">
+            <input type="text" id="task" name="task" placeholder="Enter task here" required="">
+            <input type="submit" value="Submit" class="submit">
+        </form><br>
+      </div>
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+      <div style="height: 500px; width: 800px; overflow-y: auto; margin: auto;" class="ol-container">
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       <ol class="old-element">
+       
+       </ol>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       </div>
+       
+      
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+         
+    <script>
+          $(document).ready(function() {
+$('#exampleModal').on('show.bs.modal', function(event) {
+  var button = $(event.relatedTarget);
+  var taskId = button.data('task-id');
+  $(this).find('#task-id').val(taskId);
+});
+
+// Replace .on('show.bs.modal', ...) with .click(...), as shown below
+$('button[data-toggle="modal"]').click(function() {
+  var button = $(this);
+  var taskId = button.data('task-id');
+  $('#exampleModal #task-id').val(taskId);
+});
+});
+
+let taskItems = document.querySelectorAll(".task-item")
+taskItems.forEach((taskItem) => {
+  const taskStatus = taskItem.querySelector("input[type='checkbox']").checked
+  if (taskStatus) {
+    taskItem.querySelector(".task-text").classList.add("strikethrough")
+  }
+})
+
+    </script>
+
+</body></html>
